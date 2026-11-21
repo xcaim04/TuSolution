@@ -166,6 +166,11 @@ pantalla en cada sección.
   agrega repositorios con `allprojects`, Gradle 9 puede rechazarlos. Usa un
   `GRADLE_USER_HOME` aislado para este proyecto o elimina esa configuración
   global.
+- **Artefactos del motor Flutter no encontrados:** errores como
+  `Could not find io.flutter:flutter_embedding_debug` indican que faltan los
+  repositorios `https://storage.googleapis.com/download.flutter.io` y
+  `https://storage.flutter-io.cn/download.flutter.io` en
+  `android/settings.gradle.kts`.
 - **Código Drift desactualizado:** ejecuta
   `dart run build_runner build --delete-conflicting-outputs`.
 - **APK en CI:** revisa los artefactos del workflow; no es necesario compilar
