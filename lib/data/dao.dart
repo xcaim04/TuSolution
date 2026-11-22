@@ -64,8 +64,13 @@ class WorkshopDao extends DatabaseAccessor<AppDatabase> with _$WorkshopDaoMixin 
     if (filters.isNotEmpty) {
       query.where(filters.reduce((a, b) => a & b));
     }
+    // Orden del flujo (recibida primero), no alfabético por el texto del estado.
+    final statusOrder = CaseWhenExpression<int>(cases: [
+      for (final s in OrderStatus.values)
+        CaseWhen(ordenes.estado.equals(s.dbName), then: Constant(s.index)),
+    ]);
     query.orderBy([
-      OrderingTerm.asc(ordenes.estado),
+      OrderingTerm.asc(statusOrder),
       OrderingTerm.desc(ordenes.fechaRecepcion),
     ]);
 
