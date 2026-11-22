@@ -113,4 +113,12 @@ void main() {
       throwsA(isA<InvalidTransitionException>()),
     );
   });
+
+  test('órdenes se listan en el orden del flujo, no alfabético', () async {
+    await newOrder();
+    final orders = await repo.watchOrders().first;
+    final indexes = orders.map((o) => o.status.index).toList();
+    expect(indexes, [...indexes]..sort());
+    expect(orders.first.status, OrderStatus.recibida);
+  });
 }
